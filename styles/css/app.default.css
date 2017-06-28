@@ -1,0 +1,44 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+.primary-color-bg {
+  background-color: #A9A9A9;
+}
+.primary-color {
+  color: #A9A9A9;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.mega-menu-custom {
+  list-style: none;
+}
+.signout {
+  color: #ffffff;
+}
+.float-right {
+  float: right;
+}
+a {
+  color: #4d4d4d;
+}
+a:hover {
+  color: #808080;
+  text-decoration: none;
+}
+table {
+  border: 1px solid #808080;
+  width: 100%;
+}
+th {
+  background: #ffffff;
+  font-weight: bold;
+  padding: 2px;
+}
+.text-align-center {
+  text-align: center;
+}
+.form .bill-calc {
+  padding: 0px;
+}

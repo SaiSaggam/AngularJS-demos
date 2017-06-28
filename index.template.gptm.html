@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us" class="no-js full-height">
+
+<head>
+    <meta charset="utf-8">
+    <title>Broadridge-GPTM</title>
+    <meta name="description" content="Broadridge Unified Portal">
+    <meta name="author" content="Broadridge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/vendor.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/app.min.css" />
+    <link rel="shortcut icon" href="assets/img/favicon/favicon.ico" type="image/x-icon">
+</head>
+
+<body data-smart-device-detect data-smart-fast-click data-smart-layout data-smart-page-title="Broadridge-GPTM" ng-controller="MainController" class="full-height" oncontextmenu="return false;">
+    <div data-ui-view="root" data-autoscroll="false" class="full-height"></div>
+    <!--[if lt IE 11]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <script src="assets/js/vendor-2.3.min.js"></script>
+    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/app.mocks.min.js"></script>
+</body>
+
+</html>
+
+
+<!-- Layout html-->
+
+<!-- HEADER -->
+<div data-smart-include="app/layout/partials/header.tpl.html" class="placeholder-header"></div>
+<!-- END HEADER -->
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<!-- <div data-smart-include="app/layout/partials/navigation.tpl.html" class="placeholder-left-panel"></div> -->
+<!-- END NAVIGATION -->
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+    <!-- <demo-states></demo-states> -->
+    <!-- RIBBON -->
+    <div id="ribbon">
+        <!-- breadcrumb -->
+        <br-breadcrumb></br-breadcrumb>
+        <span ng-controller="FavController" ng-click="onClick()"><i class="fa fa-star-o starEmpty" ng-if="selected != true" ></i><i class="fa fa-star starFilled" ng-if="selected == true"></i></span>
+        <div class="userDisplay" ng-controller="LoginController">{{getDisplayName()}}<i class="fa fa-user"></i></div>
+        <!-- end breadcrumb -->
+        <!-- <span class="notify">
+                <a href-void class="pull-right"
+                   data-popover-trigger="mouseenter"
+                   data-popover-placement="left"
+                   data-popover="Loading..." data-html="true"><i class="fa fa-question-circle"></i>
+                </a>
+            </span>
+ -->
+    </div>
+    <!-- END RIBBON -->
+    <div class="header-dropdown-list hidden-xs ng-cloak" ng-controller="LanguagesController">
+    </div>
+    <div data-smart-router-animation-wrap="content content@app" data-wrap-for="#content">
+        <div data-ui-view="content" data-autoscroll="false" class="full-height"></div>
+    </div>
+</div>
+<!-- END MAIN PANEL -->
+<!-- PAGE FOOTER -->
+<!-- <div data-smart-include="app/layout/partials/footer.tpl.html"></div> -->
+<!-- <div data-smart-include="app/layout/shortcut/shortcut.tpl.html"></div> -->
+<!-- END PAGE FOOTER -->

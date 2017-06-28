@@ -1,0 +1,30 @@
+{
+  "name": "sample-proj",
+  "version": "1.0.0",
+  "description": "Angular Project Using gulp",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://grigson@bitbucket.org/grigson/smartadmin-angularjs-version-2.git/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mahesh Chikkam",
+  "license": "ISC",
+  "devDependencies": {
+    "connect": "^3.4.1",
+    "event-stream": "^3.3.4",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-less": "^3.1.0",
+    "gulp-minify": "0.0.14",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.9",
+    "less": "^2.7.1",
+    "xls-to-json": "^0.4.0"
+  }
+}

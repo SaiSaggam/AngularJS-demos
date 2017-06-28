@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <p class="signout col-md-12"><a href="#" class="float-right" ng-click="signout()">Signout</a></p>
+    </div>
+</div>
+<div>
+    <div>
+        <button class="login-button bill-calc ripple" ng-click="billCalculationPerHead('fromHTML')">Bill Calculation</button>
+    </div>
+    <div class="form" ng-if="showDetails">
+        <div class="row">
+            <form>
+                <table>
+                    <tr>
+                        <th class="text-align-center">Name</th>
+                        <th class="text-align-center">Amount</th>
+                    </tr>
+                    <tr ng-repeat="bill in finalBills">
+                        <td>{{bill.Name}}</td>
+                        <td>{{bill.Amount}}</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <br/>
+        <div class="row">
+            <label>Total Count = </label>
+            <label>{{totalCount}}</label>
+        </div>
+        <br/>
+        <div class="row">
+            <input type="text">
+        </div>
+    </div>
+</div>

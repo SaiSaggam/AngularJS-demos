@@ -1,0 +1,186 @@
+{
+	"id": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+	"name": "OIL Services",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "366a587e-8fb6-b2ed-ab9e-e851a4349526",
+			"name": "1. OAuth Token",
+			"description": "Get or refresh token",
+			"order": [
+				"46fd550f-5e3d-9714-6ebd-f1beccaf33af"
+			],
+			"owner": 0,
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db"
+		},
+		{
+			"id": "2a10918d-7928-1fb4-c97d-41056b0bcac3",
+			"name": "2. Find Individual",
+			"description": "",
+			"order": [
+				"4c4050d3-cff3-5765-a3bd-4236583b46b3"
+			],
+			"owner": 0,
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db"
+		},
+		{
+			"id": "29648226-26cf-8d0a-f0b3-6be00a154c67",
+			"name": "3. Find Membership",
+			"description": "Same as Find Individual",
+			"order": [
+				"bab82747-0b64-5cf7-aca1-3d5de7a5edd1"
+			],
+			"owner": 0,
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db"
+		},
+		{
+			"id": "c6ffba6a-2db7-8b67-6986-836f002334c8",
+			"name": "3a. Find Individual Memberships",
+			"description": "Course Grain Call ... ",
+			"order": [
+				"35245128-80da-c1b0-c056-d4b5d2dbbd0d"
+			],
+			"owner": 0
+		},
+		{
+			"id": "19a5b2d9-a8ef-6891-283b-1a244034f2c2",
+			"name": "4. Get Subscription Benefit",
+			"description": "This is a course grain call ... which calls three fine grain calls:\n\tgetBenefitAccumulators, \n\tgetSubscriptionPlanBenefit, and getSubscriptionServiceBenefit",
+			"order": [
+				"e3390647-141c-e0b4-5954-0ed2b7bebd51"
+			],
+			"owner": 0
+		},
+		{
+			"id": "a9d3d5cd-a974-d8c2-0734-eb7ee48a332a",
+			"name": "5. Get Benefit Language",
+			"description": "Retrieve the Language and Display for the selected Plan_id.",
+			"order": [],
+			"owner": 0
+		}
+	],
+	"timestamp": 1477692749631,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "35245128-80da-c1b0-c056-d4b5d2dbbd0d",
+			"headers": "Content-Type: application/json\ntimestamp: {{expires_in}}\nactor: {{token_type}}\nscope: {{scope}}\nAuthorization: {{token_type}} {{access_token}}\n",
+			"url": "https://{{url}}/api/alpha/eisl/individuals/individualmemberships/v1/search",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"individualId\", jsonData.findIndividualsResult.findIndividualsResponseMsgType.individual[0].individualId.id);\n\ntests[\"findIndividualsResponseMsgType is present\"] = responseBody.has(\"findIndividualsResponseMsgType\"); \ntests[\"Body matches individualId\"] = responseBody.has(\"individualId\");\n\nconsole.log(\"individualId: \", postman.getEnvironmentVariable(\"individualId\"));",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1477936314313,
+			"name": "Layer7-FindIndividualMembership",
+			"description": "First go get the Token using OAUTH.\nExecute findIndividualMembership Call with that token",
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+			"responses": [],
+			"rawModeData": "{\r\n            \"findIndividualMembershipRequest\": {\r\n                        \"findIndividualMembershipRequestType\": {\r\n                                    \"name\": {\r\n                                                \"firstName\": \"Clinton\",\r\n                                                \"lastName\": \"Pearine\"\r\n                                    },\r\n                                    \"birthDate\": { \"date\": \"1935-06-14\" },\r\n    \t\t\t\t\t\t\t\t\"state\": { \"code\": \"MO\" },\r\n      \t\t\t\t\t\t\t\t\"postalCode\": { \"part1\": \"63147\" },\r\n                                    \"timeLineIndicator\": \"2\",\r\n                                    \"customerAccountId\": {{customerAccountId}},\r\n                                    \"coverageTypeCode\": [\"B\"],\r\n                                    \"effectiveDates\": {\r\n                                                \"startDate\": \"2011-08-01\"\r\n                                    }\r\n                        }\r\n            }\r\n}"
+		},
+		{
+			"id": "46fd550f-5e3d-9714-6ebd-f1beccaf33af",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "https://{{url}}/auth/oauth/v2/token",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "{{grant_type}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "{{client_id}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_secret",
+					"value": "{{client_secret}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\r\npostman.setEnvironmentVariable(\"access_token\", data.access_token);\r\npostman.setEnvironmentVariable(\"token_type\", data.token_type);\r\npostman.setEnvironmentVariable(\"expires_in\", data.expires_in);\r\npostman.setEnvironmentVariable(\"scope\", data.scope);\r\ntests[\"token_type is Bearer\"] = data.token_type === \"Bearer\";\r\ntests[\"access_token is retrieved and set\"] = responseBody.has(\"access_token\");",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1477933883382,
+			"name": "Get Token",
+			"description": "OAuth access token",
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+			"responses": []
+		},
+		{
+			"id": "4c4050d3-cff3-5765-a3bd-4236583b46b3",
+			"headers": "Content-Type: application/json\ntimestamp: {{expires_in}}\nactor: {{token_type}}\nscope: {{scope}}\nAuthorization: {{token_type}} {{access_token}}\n",
+			"url": "https://{{url}}/api/alpha/eisl/individuals/v1/search",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"individualId\", jsonData.findIndividualsResult.findIndividualsResponseMsgType.individual[0].individualId.id);\n\ntests[\"findIndividualsResponseMsgType is present\"] = responseBody.has(\"findIndividualsResponseMsgType\"); \ntests[\"Body matches individualId\"] = responseBody.has(\"individualId\");\n\nconsole.log(\"individualId: \", postman.getEnvironmentVariable(\"individualId\"));",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1477744470667,
+			"name": "Layer7-FindIndividual",
+			"description": "First go get the Token using OAUTH.\nExecute findIndividual Call with that token",
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"findIndividuals\": {\r\n\t\"findIndividualsRequestMsgType\": {\r\n\t\"name\": {\r\n\t\"firstName\": \"Clinton\",\r\n\t\"lastName\": \"Pearine\",\r\n\t\"suffixCode\": {}\r\n\t}\r\n\t}\r\n\t}\r\n}\r\n"
+		},
+		{
+			"id": "bab82747-0b64-5cf7-aca1-3d5de7a5edd1",
+			"headers": "Content-Type: application/json\ntimestamp: {{expires_in}}\nactor: {{token_type}}\nscope: {{scope}}\nAuthorization: {{token_type}} {{access_token}}\n",
+			"url": "https://{{url}}/api/alpha/eisl/individuals/membership/v1/search",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\n\n//postman.setEnvironmentVariable(\"planCode\", jsonData.findMembershipResponse.findMembershipResponseType.individual[0].membership[0].plan.planIdentifier.code.code);\npostman.setEnvironmentVariable(\"customerAccountId\", jsonData.findMembershipResponse.findMembershipResponseType.individual[0].membership[0].customerAccount.customerAccountId.id);\n\npostman.setEnvironmentVariable(\"subscriberIndividualId\", jsonData.findMembershipResponse.findMembershipResponseType.individual[0].membership[0].subscriberIndividualId.id);\n\ntests[\"findMembershipResponseType is present\"] = responseBody.has(\"findMembershipResponseType\"); \ntests[\"customerAccountId is retrieved and set\"] = responseBody.has(\"customerAccountId\");\ntests[\"subscriberIndividualId is retrieved and set\"] = responseBody.has(\"subscriberIndividualId\");\n\nconsole.log(\"customerAccountId: '\", postman.getEnvironmentVariable(\"customerAccountId\"));\nconsole.log(\"subscriberIndividualId: '\", postman.getEnvironmentVariable(\"subscriberIndividualId\"));",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1477749518061,
+			"name": "Layer7-FindMembership",
+			"description": "First go get the Token using OAUTH.\nExecute findIndividual Call with that token",
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+			"responses": [],
+			"rawModeData": "{\r\n  \"findMembershipRequest\": {\r\n    \r\n    \"findMembershipRequestType\": {\r\n      \"individualId\": { \"id\": {{individualId}} },\r\n      \"timelineIndicator\": \"3\",\r\n      \"effectiveDates\": {\"startDate\": \"2008-03-01\", \"stopDate\": \"2010-12-31\"}\r\n    }\r\n  }\r\n}\r\n"
+		},
+		{
+			"id": "e3390647-141c-e0b4-5954-0ed2b7bebd51",
+			"headers": "Content-Type: application/json\ntimestamp: {{expires_in}}\nactor: {{token_type}}\nscope: {{scope}}\nAuthorization: {{token_type}} {{access_token}}\n",
+			"url": "https://{{url}}/api/alpha/eisl/benefits/v1/subscriptionbenefit/read",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\n\ntests[\"getSubscriptionBenefitRequestMsgType is present\"] = responseBody.has(\"getSubscriptionBenefitRequestMsgType\"); \n/**\npostman.setEnvironmentVariable(\"customerAccountId\", jsonData.findMembershipResponse.findMembershipResponseType.individual[0].membership[0].customerAccount.customerAccountId.id);\n\npostman.setEnvironmentVariable(\"subscriberIndividualId\", jsonData.findMembershipResponse.findMembershipResponseType.individual[0].membership[0].subscriberIndividualId.id);\n\n\ntests[\"customerAccountId is retrieved and set\"] = responseBody.has(\"customerAccountId\");\ntests[\"subscriberIndividualId is retrieved and set\"] = responseBody.has(\"subscriberIndividualId\");\n\nconsole.log(\"customerAccountId: '\", postman.getEnvironmentVariable(\"customerAccountId\"));\nconsole.log(\"subscriberIndividualId: '\", postman.getEnvironmentVariable(\"subscriberIndividualId\"));\n**/",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1477935666186,
+			"name": "Layer7-GetSubscriptionBenefit",
+			"description": "First go get the Token using OAUTH.\nExecute findIndividual Call with that token",
+			"collectionId": "96fbb1ad-1bca-ea87-b692-2b503ed480db",
+			"responses": [],
+			"rawModeData": "{\r\n  \"getSubscriptionBenefitRequest\": {\r\n    \"getSubscriptionBenefitRequestMsgType\": {\r\n      \"customerAccountId\": { \"id\": {{customerAccountId}} },\r\n      \"subscriberIndividualId\": {{subscriberIndividualId}},\r\n      \"timelineIndicator\": \"3\",\r\n      \"coverageEffectiveDates\": {\"startDate\": \"2008-03-01\", \"stopDate\": \"2010-12-31\"}\r\n    }\r\n  }\r\n}\r\n"
+		}
+	]
+}

@@ -1,0 +1,25 @@
+<div class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <div class="row">
+                <i class="fa fa-user fa-5x margin-bottom-10 primary-color" aria-hidden="true"></i>
+                <br/>
+                <label class="margin-bottom-10">{{message}}</label>
+            </div>
+            <div class="row">
+                <input type="text" placeholder="Username" ng-model="username"></input>
+                <input type="password" placeholder="Password" ng-model="password"></input>
+                <button class="login-button ripple" ng-click="login()" hotkey="{'ctrl+alt+l': login}">login</button>
+            </div>
+            <div class="row">
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 
+    tool tip usage
+
+ <data-toggle="tooltip" data-placement="top" title="Direcitve Checking" ch-tool-tip>
+
+  -->
